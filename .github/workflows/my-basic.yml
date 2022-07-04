@@ -1,0 +1,30 @@
+# -----------------------------------------------------
+# Github actions part 1
+# Ustos: Denis Astahov
+# Shogird: Sh 
+# 2022yil
+# ------------------------------------------------------
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+ 
+
+jobs:
+  
+  my-testing:
+    runs-on: ubuntu-latest
+
+  # Steps 
+    steps: 
+    - name: Print hello message 
+      run : echo "Hello World from Testing job"
+          
+  my_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print hello message 
+      run : echo "Hello World from Deploy job "
