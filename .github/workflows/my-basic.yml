@@ -34,15 +34,27 @@ jobs:
   
     - name: Git clone my repo
       uses: actions/checkout@v1 
-     - name: List current folder
+    - name: List current folder
       run: ls -la
       
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my-testing]  
+    env:
+      VAR1: "This is job level variable 1"
+      VAR2: "This is job level variable 2"
+    
+    
     steps:
     - name: Print hello message 
       run : echo "Hello World from Deploy job "
+    - name: Print env vars
+      run: |
+        echo  "Var1 = ${{ env.Var1 }}"
+        echo  "Var2 = ${{ env.Var2 }}"
+        echo  "Var3 = $LOCAL_VAR"
+        env: 
+          LOCAL_VAR: "This is local enviroment variable"
     
     - name: Printing Hello message in Deploy 
       run: echo "Deploy_package_name is ${{  env.DEPLOY_PACKAGE_NAME }}"
@@ -50,4 +62,4 @@ jobs:
     - name: Lets test some packages if they are here 1
       run: aws --version
     - name: Lets test some packages if they are here 2
-      run: zip
+      run: zip --version
